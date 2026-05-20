@@ -501,6 +501,16 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    overflow: visible;
+  }
+  .cert-glow {
+    position: absolute;
+    top: -80px; left: -100px; right: -100px; bottom: -120px;
+    background: radial-gradient(ellipse 70% 65% at 50% 55%, rgba(232,213,163,0.35) 0%, rgba(200,169,110,0.20) 35%, rgba(200,169,110,0.07) 60%, transparent 80%);
+    filter: blur(50px);
+    border-radius: 50%;
+    z-index: 0;
+    pointer-events: none;
   }
   .featured-video-outer::before {
     content: '';
@@ -844,13 +854,14 @@
 </section>
 
 <!-- CERTYFIKAT -->
-<section style="background: var(--bg2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); text-align: center; overflow: visible;">
+<section style="background: var(--bg2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); text-align: center; overflow: visible; padding-top: 3rem; padding-bottom: 5rem;">
   <div class="section-tag reveal">Potwierdzenie kompetencji</div>
   <h2 class="section-title reveal">Certyfikat</h2>
   <p style="color:var(--muted); max-width:480px; margin:0.5rem auto 2.5rem; font-size:0.95rem;" class="reveal">Ukończony zaawansowany kurs montażu prowadzony przez Dawida Kowalika.</p>
 
-  <div class="featured-video-outer reveal reveal-delay-2">
-    <div class="featured-video-wrap" style="aspect-ratio: 16/9;">
+  <div class="featured-video-outer reveal reveal-delay-2" style="padding-bottom: 60px; margin-top: 0.5rem;">
+    <div class="cert-glow"></div>
+    <div class="featured-video-wrap" style="aspect-ratio: 16/9; position: relative; z-index: 1;">
       <img src="certyfikat.jpg" alt="Certyfikat ukończenia kursu montażu" style="width:100%; height:100%; object-fit:cover; display:block;">
     </div>
   </div>
