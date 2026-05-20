@@ -543,6 +543,30 @@
     border: none;
     display: block;
   }
+  .cert-wrap {
+    width: 100%;
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid rgba(232,213,163,0.2);
+    position: relative;
+    transform: perspective(1200px) rotateX(22deg) scale(0.95);
+    transform-origin: center bottom;
+    box-shadow:
+      0 40px 80px rgba(0,0,0,0.7),
+      0 0 0 1px rgba(232,213,163,0.06);
+    z-index: 1;
+    transition:
+      transform 1.1s cubic-bezier(0.16, 1, 0.3, 1),
+      box-shadow 1.1s cubic-bezier(0.16, 1, 0.3, 1),
+      border-color 1.1s ease;
+  }
+  .cert-wrap.straightened {
+    transform: perspective(1200px) rotateX(0deg) scale(1);
+    box-shadow:
+      0 20px 60px rgba(0,0,0,0.5),
+      0 0 0 1px rgba(232,213,163,0.15);
+    border-color: rgba(232,213,163,0.35);
+  }
   .featured-placeholder {
     width: 100%;
     height: 100%;
@@ -861,7 +885,7 @@
 
   <div class="featured-video-outer reveal reveal-delay-2" style="margin: 0.5rem auto 60px !important;">
     <div class="cert-glow"></div>
-    <div class="featured-video-wrap" style="aspect-ratio: 16/9; position: relative; z-index: 1;">
+    <div class="cert-wrap" id="cert-wrap" style="aspect-ratio: 16/9; position: relative; z-index: 1;">
       <img src="certyfikat.jpg" alt="Certyfikat ukończenia kursu montażu" style="width:100%; height:100%; object-fit:cover; display:block;">
     </div>
   </div>
@@ -1156,6 +1180,30 @@
 
   setTimeout(checkReveal, 100);
   parallax();
+</script>
+
+<script>
+  // CERT SCROLL STRAIGHTEN
+  const certWrap = document.getElementById('cert-wrap');
+  const certOuter = certWrap ? certWrap.closest('.featured-video-outer') : null;
+
+  function animateCert() {
+    if (!certWrap || !certOuter) return;
+    const rect = certOuter.getBoundingClientRect();
+    const vh = window.innerHeight;
+
+    // element widoczny na ekranie
+    const visible = rect.top < vh * 0.75 && rect.bottom > vh * 0.25;
+
+    if (visible) {
+      certWrap.classList.add('straightened');
+    } else {
+      certWrap.classList.remove('straightened');
+    }
+  }
+
+  window.addEventListener('scroll', animateCert, { passive: true });
+  animateCert();
 </script>
 
 </body>
